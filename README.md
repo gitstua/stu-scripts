@@ -1,4 +1,9 @@
-# Warranty
+# Purpose
+This repo contains scripts to interact with GitHub using GitHub CLI.
+
+A workflow demonstrating the use of some of these scripts is also included. 
+
+## Warranty
 This software is provided "as is" and without any express or implied warranties, including, without limitation, the implied warranties of merchantability and fitness for a particular purpose.
 
 ## Pre-requisites
