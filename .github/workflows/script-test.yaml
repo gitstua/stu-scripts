@@ -21,6 +21,7 @@ jobs:
         run: |
           # login to github
           gh auth login
-          gh auth status
+          pwd
+          ls -la
           chmod +x ./get-commits-count.sh
           ./get-commits-count.sh      
