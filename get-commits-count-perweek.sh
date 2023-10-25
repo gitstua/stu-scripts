@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "------------------------------------------------------------"
-echo PURPOSE: get commit count per day for last 7 days for all repositories in an organization
+echo SCRIPT: $0
+echo PURPOSE: get weekly commit count for last 52 weeks for all repositories in an organization
 echo PRE-REQUISITES: see https://github.com/gitstua/stu-scripts#pre-requisites
 echo DISCLAIMER: NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
 echo "------------------------------------------------------------"
@@ -16,7 +17,7 @@ echo "------------------------------------------------------------"
 # Get list of repositories in organization
 repos=$(gh repo list $org_name --json name --jq '.[].name')
 
-# Loop through each repository and get commit count per day for last 7 days
+# Loop through each repository and output weekly commit count for last 52 weeks if there are any commits in that week
 for repo in $repos
 do
     echo "Commit count per day for $repo:"
