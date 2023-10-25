@@ -10,7 +10,7 @@ jobs:
   run-scripts:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ secrets.SCRIPTS_PAT_TOKEN }}
       org_name: "gitstua-labs"
     steps:
       - name: Checkout code
