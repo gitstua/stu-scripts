@@ -20,7 +20,7 @@ jobs:
       - name: Run get-commits-count.sh
         run: |
           # login to github
-          gh auth login
+          echo $GH_TOKEN | gh auth login --with-token
           pwd
           ls -la
           chmod +x ./get-commits-count.sh
