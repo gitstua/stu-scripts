@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "------------------------------------------------------------"
+echo SCRIPT: $0
 echo PURPOSE: Retrieves the count of commits for each repository in a given organization
 echo PRE-REQUISITES: see https://github.com/gitstua/stu-scripts#pre-requisites
 echo DISCLAIMER: NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
