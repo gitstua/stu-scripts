@@ -18,6 +18,8 @@ jobs:
       # run ./get-commits-count.sh
       - name: Run get-commits-count.sh
         run: |
+          # login to github
+          gh auth login --with-token $GITHUB_TOKEN
           gh auth status
           chmod +x ./get-commits-count.sh
           ./get-commits-count.sh      
