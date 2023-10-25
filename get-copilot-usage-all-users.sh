@@ -1,22 +1,21 @@
 #!/bin/bash
 
-echo UNTESTED SCRIPT - USE AT OWN RISK!
-echo you need to install GitHub CLI and jq
-echo use gh auth login to login to your GitHub account
-echo you may need to also run gh auth refresh -h github.com -s copilot
-echo and gh auth refresh -h github.com -s manage_billing:copilot
+echo "------------------------------------------------------------"
+echo PURPOSE: get commit count per day for last 7 days for all repositories in an organization
+echo PRE-REQUISITES: see https://github.com/gitstua/stu-scripts#pre-requisites
+echo DISCLAIMER: NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+echo "------------------------------------------------------------"
 
-# add blank line to echo
-echo
-read -p "Press enter to continue"
+# load .env file if this exists
+[ -f .env ] && { set -o allexport; source .env; set +o allexport; } || echo "No .env file not found"
 
-# Set the ORG variable to the name of your organization
-ORG="yourorganizationname-here"
+# if not set then prompt for required environment variables
+[ -z "$org_name" ] && read -p "Enter organization name: " org_name
 
 # Loop through all members of the organization
-for username in $(gh api "/orgs/$ORG/members" --jq '.[].login'); do
+for username in $(gh api "/orgs/$org_name/members" --jq '.[].login'); do
     # Get the copilot usage for the current user
-    copilot_usage=$(gh api "/orgs/$ORG/members/$username/copilot" --jq '.usage')
+    copilot_usage=$(gh api "/orgs/$org_name/members/$username/copilot" --jq '.usage')
 
     # Print the copilot usage for the current user
     echo "$username: $copilot_usage"

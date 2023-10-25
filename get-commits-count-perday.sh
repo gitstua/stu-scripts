@@ -1,4 +1,16 @@
-read -p "Enter organization name: " org_name
+#!/bin/bash
+
+echo "------------------------------------------------------------"
+echo PURPOSE: get commit count per day for last 7 days for all repositories in an organization
+echo PRE-REQUISITES: see https://github.com/gitstua/stu-scripts#pre-requisites
+echo DISCLAIMER: NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+echo "------------------------------------------------------------"
+
+# load .env file if this exists
+[ -f .env ] && { set -o allexport; source .env; set +o allexport; } || echo "No .env file not found"
+
+# if not set then prompt for required environment variables
+[ -z "$org_name" ] && read -p "Enter organization name: " org_name
 
 # Get list of repositories in organization
 repos=$(gh repo list $org_name --json name --jq '.[].name')

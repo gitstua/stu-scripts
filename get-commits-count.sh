@@ -1,13 +1,16 @@
 #!/bin/bash
 
-echo you need to install GitHub CLI and jq
-echo use gh auth login to login to your GitHub account
+echo "------------------------------------------------------------"
+echo PURPOSE: get commit count per day for last 7 days for all repositories in an organization
+echo PRE-REQUISITES: see https://github.com/gitstua/stu-scripts#pre-requisites
+echo DISCLAIMER: NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+echo "------------------------------------------------------------"
 
-# add blank line to echo
-echo
+# load .env file if this exists
+[ -f .env ] && { set -o allexport; source .env; set +o allexport; } || echo "No .env file not found"
 
-# Prompt the user to enter the name of the GitHub organization
-read -p "Enter the name of the GitHub organization: " org_name
+# if not set then prompt for required environment variables
+[ -z "$org_name" ] && read -p "Enter organization name: " org_name
 
 # Use the GitHub API to retrieve a list of repositories for the organization
 repos=$(gh api "/orgs/$org_name/repos" | jq -r '.[].name')
