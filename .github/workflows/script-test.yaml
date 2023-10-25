@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # W sign in with a custom pat token to run scripts. 
+      # We sign in with a custom fine grained pat token to run scripts. 
       # Note you cannot use an ENV named GH_TOKEN as this gives an error
       - name: Run get-commits-count.sh
         run: |
