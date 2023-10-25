@@ -11,7 +11,8 @@ echo "------------------------------------------------------------"
 
 # if not set then prompt for required environment variables
 [ -z "$org_name" ] && read -p "Enter organization name: " org_name
-[ -z "$org_name" ] && read -p "Enter SSO user email: " user_email
+[ -z "$user_email" ] && read -p "Enter SSO user email: " user_email
+###################################################
 
 # use graphql to get the user id from the sso identity using externalIdentities and samlIdentityProvider
 user_id=$(gh api graphql -f query="query { organization(login: \"$org_name\") { samlIdentityProvider { externalIdentities(userName: \"$user_email\", first: 1) { nodes { user { login } } } } } }" --jq '.data.organization.samlIdentityProvider.externalIdentities.nodes[0].user.login')
@@ -24,3 +25,5 @@ for pr_url in $(echo $pr | jq -r '.[].url'); do
     pr_name=$(echo $pr | jq -r --arg pr_url "$pr_url" '.[] | select(.url == $pr_url) | .title')
     echo "$pr_name: $pr_url"
 done
+
+echo 

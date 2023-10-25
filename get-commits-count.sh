@@ -11,6 +11,7 @@ echo "------------------------------------------------------------"
 
 # if not set then prompt for required environment variables
 [ -z "$org_name" ] && read -p "Enter organization name: " org_name
+###################################################
 
 # Use the GitHub API to retrieve a list of repositories for the organization
 repos=$(gh api "/orgs/$org_name/repos" | jq -r '.[].name')
@@ -26,3 +27,5 @@ do
     # Output the count of commits for the current repository
     echo "Commits for $org_name/$repo: $repo_commits"
 done
+
+echo 

@@ -11,6 +11,7 @@ echo "------------------------------------------------------------"
 
 # if not set then prompt for required environment variables
 [ -z "$org_name" ] && read -p "Enter organization name: " org_name
+###################################################
 
 # Get list of repositories in organization
 repos=$(gh repo list $org_name --json name --jq '.[].name')
@@ -22,3 +23,5 @@ do
     gh api "/repos/$org_name/$repo/stats/commit_activity" --paginate --jq '.[] | select(.total > 0) | {date: (.week + 604800) | strftime("%Y-%m-%d"), count: .total}' | sed "s/^/{\"repo\":\"$repo\",/" | sed "s/}$/}/"
     echo ""
 done
+
+echo 

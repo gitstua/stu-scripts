@@ -11,6 +11,7 @@ echo "------------------------------------------------------------"
 
 # if not set then prompt for required environment variables
 [ -z "$org_name" ] && read -p "Enter organization name: " org_name
+###################################################
 
 # Loop through all members of the organization
 for username in $(gh api "/orgs/$org_name/members" --jq '.[].login'); do
@@ -20,3 +21,5 @@ for username in $(gh api "/orgs/$org_name/members" --jq '.[].login'); do
     # Print the copilot usage for the current user
     echo "$username: $copilot_usage"
 done
+
+echo 
