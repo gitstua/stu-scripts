@@ -16,12 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # run ./get-commits-count.sh
+      # W sign in with a custom pat token to run scripts. 
+      # Note you cannot use an ENV named GH_TOKEN as this gives an error
       - name: Run get-commits-count.sh
         run: |
-          # login to github
           echo $SCRIPTS_PAT_TOKEN | gh auth login --with-token
-          pwd
-          ls -la
           chmod +x ./get-commits-count.sh
           ./get-commits-count.sh      
