@@ -10,7 +10,7 @@ jobs:
   run-scripts:
     runs-on: ubuntu-latest
     env:
-      GH_TOKEN: ${{ secrets.SCRIPTS_PAT_TOKEN }}
+      SCRIPTS_PAT_TOKEN: ${{ secrets.SCRIPTS_PAT_TOKEN }}
       org_name: "gitstua-labs"
     steps:
       - name: Checkout code
@@ -20,7 +20,7 @@ jobs:
       - name: Run get-commits-count.sh
         run: |
           # login to github
-          echo $GH_TOKEN | gh auth login --with-token
+          echo $SCRIPTS_PAT_TOKEN | gh auth login --with-token
           pwd
           ls -la
           chmod +x ./get-commits-count.sh
