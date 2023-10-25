@@ -12,6 +12,7 @@ jobs:
     env:
       SCRIPTS_PAT_TOKEN: ${{ secrets.SCRIPTS_PAT_TOKEN }}
       org_name: "gitstua-labs"
+      # user_email: "" - This is set as a repo environment variable
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -21,5 +22,7 @@ jobs:
       - name: Run get-commits-count.sh
         run: |
           echo $SCRIPTS_PAT_TOKEN | gh auth login --with-token
-          chmod +x ./get-commits-count.sh
+          chmod +x ./*.sh
           ./get-commits-count.sh      
+          ./get-commits-count-perday.sh
+          ./get-ssouser-pr.sh
