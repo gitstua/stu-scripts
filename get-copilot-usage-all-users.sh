@@ -5,6 +5,7 @@ echo SCRIPT: $0
 echo PURPOSE: Retrieves the usage of GitHub Copilot for all members of a given organization
 echo PRE-REQUISITES: see https://github.com/gitstua/stu-scripts#pre-requisites
 echo DISCLAIMER: NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+echo you may need to run `gh auth refresh -h github.com -s copilot` before running this script
 echo "------------------------------------------------------------"
 
 # load .env file if this exists
