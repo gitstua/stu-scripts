@@ -2,10 +2,9 @@
 
 echo "------------------------------------------------------------"
 echo SCRIPT: $0
-echo PURPOSE: Retrieves the usage of GitHub Copilot for all members of a given organization
+echo PURPOSE: get copilot related audit events over last week 
 echo PRE-REQUISITES: see https://github.com/gitstua/stu-scripts#pre-requisites
 echo DISCLAIMER: NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
-echo you may need to run `gh auth refresh -h github.com -s copilot` before running this script
 echo "------------------------------------------------------------"
 
 # load .env file if this exists
@@ -15,13 +14,14 @@ echo "------------------------------------------------------------"
 [ -z "$org_name" ] && read -p "Enter organization name: " org_name
 ###################################################
 
-# Loop through all members of the organization
-for username in $(gh api "/orgs/$org_name/members" --jq '.[].login'); do
-    # Get the copilot usage for the current user
-    copilot_usage=$(gh api "/orgs/$org_name/members/$username/copilot" --jq '.usage')
+# Get all audit data for the last week
+#data=$(gh api "/orgs/$org_name/audit-log" --jq '.[] | select(.created_at > (now - 604800) and (.action | type) == "string" and .action | contains("copilot"))')
 
-    # Print the copilot usage for the current user
-    echo "$username: $copilot_usage"
-done
 
-echo 
+gh api "/orgs/$org_name/audit-log" --jq '.[]' > audit.json
+# | select(.created_at > (now - 604800))')
+
+# get all elements from audit.json that have a copilot action
+#jq '.[] | select(.action | contains("copilot"))' audit.json 
+
+cat audit.json | jq 'select(.action | contains("copilot"))'
