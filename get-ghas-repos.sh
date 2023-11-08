@@ -5,6 +5,8 @@ usage() {
     echo "Usage: $0 <orgname>"
     echo "Example: $0 github"
     echo "Requires: gh CLI tool, jq"
+    echo "GHES users: gh auth login --hostname <your-github-enterprise-url>"
+    echo "GHEC users: gh auth login"
     exit 1
 }
 
