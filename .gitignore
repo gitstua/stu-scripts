@@ -2,3 +2,7 @@
 audit.json
 output/*
 .DS_Store
+
+# exclude everything from ./output except .gitkeep file
+# output/*
+!output/.gitkeep
