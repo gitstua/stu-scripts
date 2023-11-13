@@ -1,3 +1,4 @@
 .env
 audit.json
 output/*
+.DS_Store

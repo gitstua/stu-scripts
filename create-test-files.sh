@@ -21,7 +21,8 @@ for ((i=1; i<=num_files; i++)); do
   touch "output/$file_name"
 
   # Generate a random file size between 10 bytes and 2MB (2097152 bytes)
-  file_size=$((RANDOM % 2097152 + 10))
+  file_size=$(((RANDOM*RANDOM) % 2097152 + 10))
+
 
   # Write random bytes to the file
   dd if=/dev/urandom of="output/$file_name" bs=1 count=$file_size
