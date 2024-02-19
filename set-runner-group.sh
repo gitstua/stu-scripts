@@ -14,7 +14,8 @@ echo "------------------------------------------------------------"
 [ -z "$org_name" ] && read -p "Enter organization name: " org_name
 [ -z "$repo_name" ] && read -p "Enter repo name: " repo_name
 
-[ -z "$runner_group_name" ] && read -p "Enter runner group name: " repo_name
+[ -z "$runner_group_name" ] && read -p "Enter runner group name: " runner_group_name
+[ -z "$repo_id" ] && read -p "Enter repo id: " repo_id
 
 ###################################################
 
@@ -39,7 +40,7 @@ gh api \
   -H "Accept: application/vnd.github+json" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   /orgs/$org_name/actions/runner-groups/$runner_group_id/repositories \
-  -F "selected_repository_ids[]=596893670" 
+  -F "selected_repository_ids[]=$repo_id" 
 
 echo show all selected repositories for the runner group
 gh api $selected_repositories_url | jq
