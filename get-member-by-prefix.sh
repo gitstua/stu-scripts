@@ -16,8 +16,6 @@ echo "------------------------------------------------------------"
 ###################################################
 
 # use graphql to print members of the organization and filter login by prefix
-#gh api graphql -f query="query { organization(login: \"$org_name\") { membersWithRole(first: 100) { nodes { login } } } }" --jq '.data.organization.membersWithRole.nodes[] | select(.login | startswith("'$prefix'"))'
-
 members=$(gh api graphql -f query="query { organization(login: \"$org_name\") { membersWithRole(first: 100) { nodes { login } } } }" --jq '.data.organization.membersWithRole.nodes[] | select(.login | startswith("'$prefix'"))')
 
 # print out the members
